@@ -9,7 +9,7 @@ export default function Home() {
 	const { useUsers } = useUsersApi();
 
 	const [users, setUsers] = useState<User[]>([]);
-	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [currentPage, setCurrentPage] = useState<number>(0);
 
 	const { data, isLoading, error } = useUsers(currentPage);
 
@@ -24,12 +24,12 @@ export default function Home() {
 	};
 
 	const goToNextPage = () => {
-		setCurrentPage(currentPage + 1);
+		setCurrentPage(currentPage + 10);
 	};
 
 	const goToPreviousPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
+		if (currentPage > 10) {
+			setCurrentPage(currentPage - 10);
 		}
 	};
 
@@ -91,7 +91,7 @@ export default function Home() {
 						Previous
 					</button>
 
-					<span className='text-sm text-slate-600'>Page {currentPage}</span>
+					<span className='text-sm text-slate-600'>Page {Math.floor(currentPage/10) + 1}</span>
 
 					<button
 						onClick={goToNextPage}
