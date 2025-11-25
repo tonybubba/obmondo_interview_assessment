@@ -1,8 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Users Management Application
 
-## Getting Started
+A Next.js application for managing and displaying team members with pagination support. Built for the Obmondo interview assessment.
 
-First, run the development server:
+## Project Requirements
+
+This project was built following these specific requirements:
+
+- ✅ **Framework:** Next.js with TypeScript (as per instructions: "use CRA or vite or nextjs with typescript")
+- ✅ **No External Libraries:** No additional JavaScript/React libraries used (only Next.js core features and built-in Tailwind CSS)
+
+## Features
+
+- 📋 Display paginated list of team members
+- 🔍 View user details including name, job title, email, and phone
+- 📧 Quick email contact links
+
+## Prerequisites
+
+Before running this application, ensure you have:
+
+- Node.js 18.x or higher
+- npm or yarn package manager
+- Environment variables configured (see below)
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+API_URL="https://give-me-users-forever.vercel.app/api/users/:page/next"
+```
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+
+```bash
+cp .env.example .env
+# Edit .env. with your API_URL
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +63,8 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built for Obmondo Interview Assessment

@@ -51,7 +51,7 @@ const UserItem = ({user}:{user: User}) => {
                   </div>
 
                  
-                  {/* Actions */}
+                  
                    {/* Actions */}
                   <Link 
                     href={`mailto:${user.EmailAddress}`}
