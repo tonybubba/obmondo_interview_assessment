@@ -6,14 +6,14 @@ A Next.js application for managing and displaying team members with pagination s
 
 This project was built following these specific requirements:
 
-- ✅ **Framework:** Next.js with TypeScript (as per instructions: "use CRA or vite or nextjs with typescript")
+- ✅ **Framework:** Next.js with TypeScript
 - ✅ **No External Libraries:** No additional JavaScript/React libraries used (only Next.js core features and built-in Tailwind CSS)
 
 ## Features
 
-- 📋 Display paginated list of team members
-- 🔍 View user details including name, job title, email, and phone
-- 📧 Quick email contact links
+- Display paginated list of team members
+- View user details including name, job title, email, and phone
+- Quick email contact links
 
 ## Prerequisites
 
