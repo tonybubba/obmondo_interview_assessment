@@ -4,6 +4,7 @@ import { useUsersApi } from '@/hooks/useUsersApi';
 import UserItem from '@/components/users/user-item';
 import { useEffect, useState } from 'react';
 import { User } from '@/types';
+import UserList from '@/components/users/user-list';
 
 export default function Home() {
 	const { useUsers } = useUsersApi();
@@ -35,25 +36,7 @@ export default function Home() {
 
 	
 
-	if (isLoading) {
-		return (
-			<div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6'>
-				<div className='max-w-4xl mx-auto text-center py-12'>
-					<p className='text-slate-500'>Loading team members...</p>
-				</div>
-			</div>
-		);
-	}
 
-	if (error) {
-		return (
-			<div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6'>
-				<div className='max-w-4xl mx-auto text-center py-12'>
-					<p className='text-red-500'>Error: {error.message}</p>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6'>
@@ -67,15 +50,11 @@ export default function Home() {
 				</div>
 
 				{/* User List */}
-				<div className='space-y-3'>
-					{!users || users.length === 0 ? (
-						<div className='text-center py-12'>
-							<p className='text-slate-500'>No team members found</p>
-						</div>
-					) : (
-						users.map((user) => <UserItem key={user.ID} user={user} />)
-					)}
+				<div>
+
+					<UserList users={users} isLoading={isLoading} error={error} />
 				</div>
+				
 
 				{/* Pagination Controls */}
 				<div className='mt-8 flex items-center justify-center space-x-4'>
