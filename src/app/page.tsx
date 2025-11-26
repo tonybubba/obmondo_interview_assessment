@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { User } from '@/types';
 import UserList from '@/components/users/user-list';
 
+
 export default function Home() {
 	const { useUsers } = useUsersApi();
 
@@ -29,7 +30,7 @@ export default function Home() {
 	};
 
 	const goToPreviousPage = () => {
-		if (currentPage > 10) {
+		if (currentPage > 0) {
 			setCurrentPage(currentPage - 10);
 		}
 	};

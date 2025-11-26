@@ -1,44 +1,61 @@
-
-
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 import { User } from '@/types';
 import { apiClient } from '@/lib/api-client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-interface UserResult{
-    users:User[];
+interface UserResult {
+	users: User[];
 }
+
+
+const fetchUsers = async (page: number): Promise<User[]> => {
+	const result = (await apiClient.get(
+		`/api/users?page=${page}`
+	)) as UserResult;
+	return result.users;
+};
 
 export const useUsersApi = () => {
 	const useUsers = (page: number) => {
-		const [data, setData] = useState<User[] | null>(null);
-		const [isLoading, setIsLoading] = useState(true);
-		const [error, setError] = useState<Error | null>(null);
+		const queryClient = useQueryClient();
+
+		const query = useQuery({
+			queryKey: ['users', page],
+			queryFn: () => fetchUsers(page),
+			staleTime: 5 * 60 * 1000,
+			gcTime: 10 * 60 * 1000,
+		});
 
 		useEffect(() => {
-			const fetchUsers = async () => {
-				setIsLoading(true);
-				setError(null);
+			if (!query.data) return;
 
-				try {
-					const result = (await apiClient.get(
-						`/api/users?page=${page}`
-					)) as UserResult;
-					setData(result.users);
-				} catch (err) {
-					setError(err instanceof Error ? err : new Error('Unknown error'));
-				} finally {
-					setIsLoading(false);
-				}
-			};
+			if (query.data.length > 0) {
+				queryClient.prefetchQuery({
+					queryKey: ['users', page + 10],
+					queryFn: () => fetchUsers(page + 10),
+					staleTime: 5 * 60 * 1000,
+				});
+			}
 
-			fetchUsers();
-		}, [page]);
+			if (page > 0) {
+				queryClient.prefetchQuery({
+					queryKey: ['users', page - 10],
+					queryFn: () => fetchUsers(page - 10),
+					staleTime: 5 * 60 * 1000,
+				});
+			}
+		}, [page, query.data, queryClient]);
 
-		return { data, isLoading, error };
+		return {
+			data: query.data ?? null,
+			isLoading: query.isLoading,
+			error: query.error,
+			isError: query.isError,
+		};
 	};
 
 	return {
-		useUsers
+		useUsers,
 	};
 };
