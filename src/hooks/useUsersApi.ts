@@ -8,11 +8,8 @@ interface UserResult {
 	users: User[];
 }
 
-
 const fetchUsers = async (page: number): Promise<User[]> => {
-	const result = (await apiClient.get(
-		`/api/users?page=${page}`
-	)) as UserResult;
+	const result = (await apiClient.get(`/api/users?page=${page}`)) as UserResult;
 	return result.users;
 };
 
@@ -37,14 +34,6 @@ export const useUsersApi = () => {
 					staleTime: 5 * 60 * 1000,
 				});
 			}
-
-			if (page > 0) {
-				queryClient.prefetchQuery({
-					queryKey: ['users', page - 10],
-					queryFn: () => fetchUsers(page - 10),
-					staleTime: 5 * 60 * 1000,
-				});
-			}
 		}, [page, query.data, queryClient]);
 
 		return {
@@ -52,8 +41,6 @@ export const useUsersApi = () => {
 			isLoading: query.isLoading,
 			error: query.error,
 			isError: query.isError,
-
-			
 		};
 	};
 

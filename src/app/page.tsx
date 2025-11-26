@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { User } from '@/types';
 import UserList from '@/components/users/user-list';
 
-
 export default function Home() {
 	const { useUsers } = useUsersApi();
 
@@ -35,10 +34,6 @@ export default function Home() {
 		}
 	};
 
-	
-
-
-
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6'>
 			<div className='max-w-4xl mx-auto'>
@@ -52,10 +47,8 @@ export default function Home() {
 
 				{/* User List */}
 				<div>
-
 					<UserList users={users} isLoading={isLoading} error={error} />
 				</div>
-				
 
 				{/* Pagination Controls */}
 				<div className='mt-8 flex items-center justify-center space-x-4'>
@@ -71,7 +64,9 @@ export default function Home() {
 						Previous
 					</button>
 
-					<span className='text-sm text-slate-600'>Page {Math.floor(currentPage/10) + 1}</span>
+					<span className='text-sm text-slate-600'>
+						Page {Math.floor(currentPage / 10) + 1}
+					</span>
 
 					<button
 						onClick={goToNextPage}
